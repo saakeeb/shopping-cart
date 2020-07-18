@@ -1,121 +1,71 @@
-//Negative cart item
-const phoneMinusBtn=document.getElementById("phone-minus");
-phoneMinusBtn.addEventListener("click", function(){
-   const phoneItem=document.getElementById("Phone-item").value;
-   const phonePrice=document.getElementById("phone-price").innerText;
-   
-//subtotal
-const subtotal=document.getElementById("subtotal").innerText;
-var subtotalNum=parseFloat(subtotal);
-//total
-const total=document.getElementById("total").innerText;
-var totalNum=parseFloat(total);
-   var phonePriceNum=parseFloat(phonePrice);
-   var PhoneItemNum=parseFloat(phoneItem);  
-   if(phoneItemNum<2){
-      document.getElementById("phone-minus").disabled=true;
-   } 
-   var phoneItemNum=phoneItemNum-1;
-   var phonePrice=phonePriceNum-1219;
+const phonePlus = document.getElementById('phonePlus');
+const phoneMinus = document.getElementById('phoneMinus');
 
-   
-//subtotal value
-subtotalNum=subtotalNum-1219;
-//total value
-totalNum=totalNum-1219;
-   document.getElementById("phone-item").value=caseItemNum;
-   document.getElementById("phone-price").innerText=phonePrice;
-   document.getElementById("subtotal").innerText=subtotalNum;
-   document.getElementById("total").innerText=totalNum;
-})
+const casePlus = document.getElementById('casePlus');
+const caseMinus = document.getElementById('caseMinus');
 
+let subtotal = document.getElementById('subtotal').value;
+let tax = document.getElementById('tax').value;
+let total = document.getElementById('total').value;
 
+let subTotalPrice = parseFloat(subtotal);
+let taxPrice = parseFloat(tax);
+let totalPrice = parseFloat(total);
 
-//Positive cart item
-const phonePlusBtn=document.getElementById("phone-plus");
-phonePlusBtn.addEventListener("click", function(){
-   const phoneItem=document.getElementById("phone-item").value;
-   const phonePrice=document.getElementById("phone-price").innerText;
-   
-//Subtotal 
-const subtotal=document.getElementById("subtotal").innerText;
-var subtotalNum=parseFloat(subtotal);
-//total
-const total=document.getElementById("total").innerText;
-var totalNum=parseFloat(total);
-   var phonePriceNum=parseFloat(phonePrice);
-   var phoneItemNum=parseFloat(phoneItem);
-   if(phoneItemNum==0){
-      document.getElementById("phone-minus").disabled=false;
+let phoneItem = document.getElementById('phoneItem').value;
+let phonePrice = document.getElementById('phonePrice').innerText;
+let itemP = parseInt(phoneItem);
+let priceP = parseFloat(phonePrice);
+
+let caseItem = document.getElementById('caseItem').value;
+let casePrice = document.getElementById('casePrice').innerText;
+let itemC = parseInt(caseItem);
+let priceC = parseFloat(casePrice);
+
+// Phone Button Listener
+phoneMinus.addEventListener('click', ()=>{
+   if( itemP > 0){
+      itemP -= 1;
+      let totalPhonePrice = priceP * itemP;
+      document.getElementById('phoneItem').value = itemP;
+      document.getElementById('phonePrice').innerText = totalPhonePrice;
    }
-   var phoneItemNum=phoneItemNum+1;
-   var phonePrice=1219*phoneItemNum;
-//subtotal value
-subtotalNum=1219+subtotalNum;
-//total value
-totalNum=1219+totalNum;
-   document.getElementById("phone-item").value=phoneItemNum;
-   document.getElementById("phone-price").innerText=phonePrice;
-   document.getElementById("subtotal").innerText=subtotalNum;
-   document.getElementById("total").innerText=totalNum;
 })
 
-//another cart
-//Adding cart
-const casePlusBtn=document.getElementById("case-plus");
-      casePlusBtn.addEventListener("click", function(){
-         const caseItem=document.getElementById("case-item").value;
-         const casePrice=document.getElementById("case-price").innerText;
-//Subtotal 
-const subtotal=document.getElementById("subtotal").innerText;
-var subtotalNum=parseFloat(subtotal);
-//total
-const total=document.getElementById("total").innerText;
-var totalNum=parseFloat(total);
+phonePlus.addEventListener('click', ()=>{
+      itemP += 1;
+      let totalPhonePrice = priceP * itemP;
+      document.getElementById('phoneItem').value = itemP;
+      document.getElementById('phonePrice').innerText = totalPhonePrice;
+   
+})
 
-         var casePriceNum=parseFloat(casePrice);
-         var caseItemNum=parseFloat(caseItem);
-         if(caseItemNum==0){
-            document.getElementById("case-minus").disabled=false;
-         }
-         var caseItemNum=caseItemNum+1;
-         var casePrice=59*casePrice;
+// Case Button Listener
+caseMinus.addEventListener('click', ()=>{
+   if(itemC > 0){
+      itemC -= 1;
+      let totalCasePrice = itemC * priceC;
 
-//subtotal value
- subtotalNum=59+subtotalNum;
-//total value
-totalNum=59+totalNum;
-         document.getElementById("case-item").value=caseItemNum;
-         document.getElementById("case-price").innerText=casePrice;
-         document.getElementById("subtotal").innerText=subtotalNum;
-         document.getElementById("total").innerText=totalNum;
+      document.getElementById('caseItem').value = itemC;
+      document.getElementById('casePrice').innerText = totalCasePrice;
+   }
+})
 
-      })
-      //Removing cart item
-      const caseMinusBtn=document.getElementById("case-minus");
-      caseMinusBtn.addEventListener("click", function(){
-         const caseItem=document.getElementById("case-item").value;
-         const casePrice=document.getElementById("case-price").innerText;
-//subtotal
-const subtotal=document.getElementById("subtotal").innerText;
-var subtotalNum=parseFloat(subtotal);
-//total
-const total=document.getElementById("total").innerText;
-var totalNum=parseFloat(total);
+casePlus.addEventListener('click', ()=>{
+   itemC += 1;
+   let totalCasePrice = itemC * priceC;
 
-         var casePriceNum=parseFloat(casePrice);
-         var caseItemNum=parseFloat(caseItem);
-         if(caseItemNum<2){
-            document.getElementById("case-minus").disabled=true;
-         } 
-         var caseItemNum=caseItemNum-1;
-         var casePrice2=casePrice-59;
-//subtotal value
-subtotalNum=subtotalNum-59;
-//total value
-totalNum=totalNum-59;
-         document.getElementById("case-item").value=caseItemNum;
-         document.getElementById("case-price").innerText=casePrice;
-         document.getElementById("subtotal").innerText=subtotalNum;
-         document.getElementById("total").innerText=totalNum;
-      })
+   document.getElementById('caseItem').value = itemC;
+   document.getElementById('casePrice').innerText = totalCasePrice;
+})
+
+// total price section
+const price = ()=>{
+   let subPrice = totalPhonePrice + totalCasePrice;
+   let proTax = (subPrice*15)/100;
+   let price = subPrice+ proTax;
+
+   document.getElementById('subtotal').innerText= subPrice;
+   document.getElementById('tax').innerText= proTax;
+   document.getElementById('total').innerText= price;
+}
