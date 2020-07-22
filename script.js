@@ -1,27 +1,3 @@
-const phonePlus = document.getElementById('phonePlus');
-const phoneMinus = document.getElementById('phoneMinus');
-
-const casePlus = document.getElementById('casePlus');
-const caseMinus = document.getElementById('caseMinus');
-
-let subtotal = document.getElementById('subtotal').value;
-let tax = document.getElementById('tax').value;
-let total = document.getElementById('total').value;
-
-let subTotalPrice = parseFloat(subtotal);
-let taxPrice = parseFloat(tax);
-let totalPrice = parseFloat(total);
-
-let phoneItem = document.getElementById('phoneItem').value;
-let phonePrice = document.getElementById('phonePrice').innerText;
-let itemP = parseInt(phoneItem);
-let priceP = parseFloat(phonePrice);
-
-let caseItem = document.getElementById('caseItem').value;
-let casePrice = document.getElementById('casePrice').innerText;
-let itemC = parseInt(caseItem);
-let priceC = parseFloat(casePrice);
-
 // Phone Button Listener
 phoneMinus.addEventListener('click', ()=>{
    if( itemP > 0){
@@ -29,43 +5,73 @@ phoneMinus.addEventListener('click', ()=>{
       let totalPhonePrice = priceP * itemP;
       document.getElementById('phoneItem').value = itemP;
       document.getElementById('phonePrice').innerText = totalPhonePrice;
+      
    }
 })
 
 phonePlus.addEventListener('click', ()=>{
-      itemP += 1;
-      let totalPhonePrice = priceP * itemP;
-      document.getElementById('phoneItem').value = itemP;
-      document.getElementById('phonePrice').innerText = totalPhonePrice;
+   itemP += 1;
+   let totalPhonePrice = priceP * itemP;
+   document.getElementById('phoneItem').value = itemP;
+   document.getElementById('phonePrice').innerText = totalPhonePrice;
+
+})
+
+// Pricing section
+let subtotal = parseFloat(document.getElementById('subtotal').innerText);
+
+function count(plusId, minusId, goodsId, itemId){
+
+   //button id
+   const minusBtn = document.getElementById(minusId);
+   const plusBtn = document.getElementById(plusId);
+
+   //value parse
+   let value = parseInt(document.getElementById(goodsId).value);
+   let price = parseFloat(document.getElementById(itemId).innerText);
    
-})
+   
+   //minus event handling
+   minusBtn.addEventListener('click', function(){
+      if(value>0){
+         value -= 1;
+         subtotal = subtotal-price;
+         calc(value, subtotal, goodsId, itemId)
+      }
+   });
+   
+   
+   //plus event handling
+   plusBtn.addEventListener('click', function(){
+      value += 1;
+      subtotal = subtotal+price;
+      calc(value, subtotal, goodsId, itemId)
+   });
 
-// Case Button Listener
-caseMinus.addEventListener('click', ()=>{
-   if(itemC > 0){
-      itemC -= 1;
-      let totalCasePrice = itemC * priceC;
-
-      document.getElementById('caseItem').value = itemC;
-      document.getElementById('casePrice').innerText = totalCasePrice;
+   //calculation function
+   function calc(value, subtotal, goodsId, itemId){
+      let total = value * price;
+      let tax = (subtotal * 15) / 100;
+      let totalPrice = subtotal + tax;
+      document.getElementById(goodsId).value = value;
+      document.getElementById(itemId).innerText = total;
+      document.getElementById('subtotal').innerText= subtotal;
+      document.getElementById('tax').innerText= tax;
+      document.getElementById('total').innerText= totalPrice;
    }
-})
-
-casePlus.addEventListener('click', ()=>{
-   itemC += 1;
-   let totalCasePrice = itemC * priceC;
-
-   document.getElementById('caseItem').value = itemC;
-   document.getElementById('casePrice').innerText = totalCasePrice;
-})
-
-// total price section
-const price = ()=>{
-   let subPrice = totalPhonePrice + totalCasePrice;
-   let proTax = (subPrice*15)/100;
-   let price = subPrice+ proTax;
-
-   document.getElementById('subtotal').innerText= subPrice;
-   document.getElementById('tax').innerText= proTax;
-   document.getElementById('total').innerText= price;
 }
+//calling method
+count('phonePlus', 'phoneMinus', 'phoneItem', 'phonePrice');
+count('casePlus', 'caseMinus', 'caseItem', 'casePrice');
+
+
+
+
+const check = document.getElementById("check");
+document.getElementById('demo').style.display="none";
+check.addEventListener("click", () => {
+
+   document.getElementById('main').style.display="none";
+   document.getElementById('demo').style.display="block";
+   
+});

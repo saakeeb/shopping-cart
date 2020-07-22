@@ -53,3 +53,10 @@ body{
 	background-color: #2FBE70;
 	border: none;
 }
+
+#demo{
+	margin: 0 40%;
+   text-align: center;
+   text-decoration: wavy;
+   color: #2FBE70;
+}
