@@ -55,8 +55,18 @@ body{
 }
 
 #demo{
-	margin: 0 40%;
+	margin: 40px 40%;
    text-align: center;
    text-decoration: wavy;
    color: #2FBE70;
+}
+a{
+	color: red;
+	font-size: 1.5rem;
+
+	
+}
+a:hover{
+	color: lightcoral;
+	text-decoration: none;
 }

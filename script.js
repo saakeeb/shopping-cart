@@ -1,26 +1,26 @@
 // Phone Button Listener
-phoneMinus.addEventListener('click', ()=>{
-   if( itemP > 0){
-      itemP -= 1;
-      let totalPhonePrice = priceP * itemP;
-      document.getElementById('phoneItem').value = itemP;
-      document.getElementById('phonePrice').innerText = totalPhonePrice;
+// phoneMinus.addEventListener('click', ()=>{
+//    if( itemP > 0){
+//       itemP -= 1;
+//       let totalPhonePrice = priceP * itemP;
+//       document.getElementById('phoneItem').value = itemP;
+//       document.getElementById('phonePrice').innerText = totalPhonePrice;
       
-   }
-})
+//    }
+// })
 
-phonePlus.addEventListener('click', ()=>{
-   itemP += 1;
-   let totalPhonePrice = priceP * itemP;
-   document.getElementById('phoneItem').value = itemP;
-   document.getElementById('phonePrice').innerText = totalPhonePrice;
+// phonePlus.addEventListener('click', ()=>{
+//    itemP += 1;
+//    let totalPhonePrice = priceP * itemP;
+//    document.getElementById('phoneItem').value = itemP;
+//    document.getElementById('phonePrice').innerText = totalPhonePrice;
 
-})
+// })
 
 // Pricing section
 let subtotal = parseFloat(document.getElementById('subtotal').innerText);
 
-function count(plusId, minusId, goodsId, itemId){
+const count = (plusId, minusId, goodsId, itemId) => {
 
    //button id
    const minusBtn = document.getElementById(minusId);
@@ -65,13 +65,24 @@ count('phonePlus', 'phoneMinus', 'phoneItem', 'phonePrice');
 count('casePlus', 'caseMinus', 'caseItem', 'casePrice');
 
 
+const remove =  (id1, id2) => {
+   document.getElementById(id1).addEventListener('click', ()=>{
+      document.getElementById(id2).style.display = 'none';
+   })
+}
+remove('removePhone', 'r1')
+remove('removeCase', 'r2')
 
 
-const check = document.getElementById("check");
+
 document.getElementById('demo').style.display="none";
+const check = document.getElementById("check");
 check.addEventListener("click", () => {
 
    document.getElementById('main').style.display="none";
    document.getElementById('demo').style.display="block";
-   
 });
+document.getElementById('backToCart').addEventListener('click', ()=>{
+   document.getElementById('main').style.display="block";
+   document.getElementById('demo').style.display="none";
+})
