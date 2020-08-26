@@ -67,11 +67,15 @@ count('casePlus', 'caseMinus', 'caseItem', 'casePrice');
 
 
 
-const check = document.getElementById("check");
+
 document.getElementById('demo').style.display="none";
+const check = document.getElementById("check");
 check.addEventListener("click", () => {
 
    document.getElementById('main').style.display="none";
    document.getElementById('demo').style.display="block";
-   
 });
+document.getElementById('backToCart').addEventListener('click', ()=>{
+   document.getElementById('main').style.display="block";
+   document.getElementById('demo').style.display="none";
+})
