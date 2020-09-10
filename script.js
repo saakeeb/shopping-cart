@@ -29,13 +29,13 @@ const count = (plusId, minusId, goodsId, itemId) => {
    //value parse
    let value = parseInt(document.getElementById(goodsId).value);
    let price = parseFloat(document.getElementById(itemId).innerText);
-   
+
    
    //minus event handling
    minusBtn.addEventListener('click', function(){
       if(value>0){
          value -= 1;
-         subtotal = subtotal-price;
+         subtotal = subtotal - price;
          calc(value, subtotal, goodsId, itemId)
       }
    });
@@ -44,7 +44,7 @@ const count = (plusId, minusId, goodsId, itemId) => {
    //plus event handling
    plusBtn.addEventListener('click', function(){
       value += 1;
-      subtotal = subtotal+price;
+      subtotal = subtotal + price;
       calc(value, subtotal, goodsId, itemId)
    });
 
@@ -65,6 +65,8 @@ count('phonePlus', 'phoneMinus', 'phoneItem', 'phonePrice');
 count('casePlus', 'caseMinus', 'caseItem', 'casePrice');
 
 
+
+
 const remove =  (id1, id2) => {
    document.getElementById(id1).addEventListener('click', ()=>{
       document.getElementById(id2).style.display = 'none';
@@ -73,14 +75,27 @@ const remove =  (id1, id2) => {
 remove('removePhone', 'r1')
 remove('removeCase', 'r2')
 
+// document.getElementById('removePhone').addEventListener('click',()=>{
+//    document.getElementById('r1').style.display = 'none'
+// })
+// document.getElementById('removeCase').addEventListener('click',()=>{
+//    document.getElementById('r2').style.display = 'none'
+// })
 
 
 document.getElementById('demo').style.display="none";
 const check = document.getElementById("check");
 check.addEventListener("click", () => {
-
-   document.getElementById('main').style.display="none";
-   document.getElementById('demo').style.display="block";
+   
+   
+   if(subtotal == 0){
+      alert('Please select some items');
+   }
+   else{
+      document.getElementById('main').style.display="none";
+      document.getElementById('demo').style.display="block";
+   }
+  
 });
 document.getElementById('backToCart').addEventListener('click', ()=>{
    document.getElementById('main').style.display="block";
